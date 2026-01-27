@@ -37,7 +37,7 @@
       </div>
 
       @if (isFolder && node.expanded && node.children) {
-      <div class="node-children" role="group">
+      <div class="node-children">
         <ng-container
           *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children,level: level + 1  }"
         ></ng-container>
