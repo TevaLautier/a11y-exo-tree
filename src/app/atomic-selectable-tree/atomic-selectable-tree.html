@@ -1,0 +1,49 @@
+<div class="tree-container">
+  <h2>Explorateur de fichiers</h2>
+
+  <div class="tree-root">
+    <ng-container
+      *ngTemplateOutlet="nodeTpl; context: { $implicit: nodes }"
+    ></ng-container>
+  </div>
+
+  <ng-template #nodeTpl let-list>
+    @for (node of list; track node.name) {
+
+    <!-- Utilisation de @let pour simplifier le code ARIA -->
+    @let isFolder = node.type === 'folder'; @let isSelected = node.selected;
+
+    <div class="node-group">
+      <div
+        class="tree-node"
+        [id]="node.name"
+        (keydown)="handleKeyDown($event, node)"
+        (click)="focusNode(node)"
+      >
+        <div class="node-content">
+          <!-- État Checkbox -->
+          <span class="cb-visual">
+            {{ node.checked === true ? '✓' : (node.checked === 'mixed' ? '-' :
+            '') }}
+          </span>
+
+          <!-- État Dossier -->
+          <span class="icon">
+            {{ isFolder ? (node.expanded ? '📂' : '📁') : '📄' }}
+          </span>
+
+          <span class="label">{{ node.name }} {{isSelected}}</span>
+        </div>
+      </div>
+
+      @if (isFolder && node.expanded && node.children) {
+      <div class="node-children">
+        <ng-container
+          *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children }"
+        ></ng-container>
+      </div>
+      }
+    </div>
+    }
+  </ng-template>
+</div>

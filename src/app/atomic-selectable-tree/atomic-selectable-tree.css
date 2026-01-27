@@ -1,0 +1,71 @@
+.tree-root {
+  border: 1px solid #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  max-width: 400px;
+}
+
+.tree-node {
+  outline: none;
+  cursor: pointer;
+  margin: 2px 0;
+}
+
+.node-content {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+/* Hover et Focus */
+.tree-node:hover .node-content {
+  background-color: #f8fafc;
+}
+
+.tree-node:focus-visible .node-content {
+  box-shadow: 0 0 0 2px #6366f1;
+}
+
+/* État Sélectionné (Focus courant) */
+.tree-node[aria-selected='true'] .node-content {
+  background-color: #f1f5f9;
+}
+
+/* La Checkbox */
+.cb-visual {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #94a3b8;
+  border-radius: 4px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tree-node[aria-checked='true'] .cb-visual {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: white;
+}
+
+.tree-node[aria-checked='mixed'] .cb-visual {
+  border-color: #4f46e5;
+  color: #4f46e5;
+}
+
+/* Hiérarchie visuelle */
+.node-children {
+  margin-left: 20px;
+  padding-left: 10px;
+  border-left: 1px dashed #cbd5e1;
+}
+
+.icon {
+  margin-right: 8px;
+}
