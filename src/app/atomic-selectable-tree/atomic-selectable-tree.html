@@ -3,18 +3,18 @@
 
   <div class="tree-root">
     <ng-container
-      *ngTemplateOutlet="nodeTpl; context: { $implicit: nodes }"
+      *ngTemplateOutlet="nodeTpl; context: { $implicit: nodes,level: 1 }"
     ></ng-container>
   </div>
 
-  <ng-template #nodeTpl let-list>
-    @for (node of list; track node.name) {
+  <ng-template #nodeTpl let-list  let-level="level">
+    @for (node of list; track node.name;let i = $index, total = $count) {
 
     <!-- Utilisation de @let pour simplifier le code ARIA -->
     @let isFolder = node.type === 'folder'; @let isSelected = node.selected;
 
     <div class="node-group">
-      <div
+      <div        
         class="tree-node"
         [id]="node.name"
         (keydown)="handleKeyDown($event, node)"
@@ -37,9 +37,9 @@
       </div>
 
       @if (isFolder && node.expanded && node.children) {
-      <div class="node-children">
+      <div class="node-children" role="group">
         <ng-container
-          *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children }"
+          *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children,level: level + 1  }"
         ></ng-container>
       </div>
       }
