@@ -1,7 +1,7 @@
 <div class="tree-container">
-  <h2>Explorateur de fichiers</h2>
+  <h2 id="tree-title">Explorateur de fichiers</h2>
 
-  <div class="tree-root">
+  <div class="tree-root" role="tree" aria-labelledBy="tree-title">
     <ng-container
       *ngTemplateOutlet="nodeTpl; context: { $implicit: nodes,level: 1 }"
     ></ng-container>
@@ -16,28 +16,35 @@
     <div class="node-group">
       <div        
         class="tree-node"
+        role="treeitem"
         [id]="node.name"
+        [aria-checked]="node.checked"
+        [aria-selected]="node.selected"
         (keydown)="handleKeyDown($event, node)"
         (click)="focusNode(node)"
+        [tabindex]="isSelected?0:-1"
+        [aria-level]="level"
+        [aria-posinset]="i"
+        [aria-setsize]="total"
       >
         <div class="node-content">
           <!-- État Checkbox -->
-          <span class="cb-visual">
+          <span class="cb-visual" aria-hidden="true">
             {{ node.checked === true ? '✓' : (node.checked === 'mixed' ? '-' :
             '') }}
           </span>
 
           <!-- État Dossier -->
-          <span class="icon">
+          <span class="icon" [aria-label]="isFolder?'Repertoire':'Fichier'">
             {{ isFolder ? (node.expanded ? '📂' : '📁') : '📄' }}
           </span>
 
-          <span class="label">{{ node.name }} {{isSelected}}</span>
+          <span class="label">{{ node.name }} </span>
         </div>
       </div>
 
       @if (isFolder && node.expanded && node.children) {
-      <div class="node-children">
+      <div class="node-children" role="group">
         <ng-container
           *ngTemplateOutlet="nodeTpl; context: { $implicit: node.children,level: level + 1  }"
         ></ng-container>
