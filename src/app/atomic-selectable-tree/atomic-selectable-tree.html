@@ -18,7 +18,7 @@
         class="tree-node"
         [id]="node.name"
         (keydown)="handleKeyDown($event, node)"
-        (click)="focusNode(node)"
+        (click)="focusNode(node)"  
       >
         <div class="node-content">
           <!-- État Checkbox -->
@@ -32,7 +32,7 @@
             {{ isFolder ? (node.expanded ? '📂' : '📁') : '📄' }}
           </span>
 
-          <span class="label">{{ node.name }} {{isSelected}}</span>
+          <span class="label">{{ node.name }}</span>
         </div>
       </div>
 

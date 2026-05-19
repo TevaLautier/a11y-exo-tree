@@ -32,6 +32,23 @@ export class App {
         { name: 'angular.json', type: 'file' },
       ],
     },
+    {
+      name: 'Projet React',
+      type: 'folder',
+      expanded: true,
+      children: [
+        {
+          name: 'src',
+          type: 'folder',
+          expanded: false,
+          children: [
+            { name: 'main.tsx', type: 'file' },
+            { name: 'test.tsx', type: 'file' },
+          ],
+        },
+        { name: 'package.json', type: 'file' },
+      ],
+    },
   ];
 }
 

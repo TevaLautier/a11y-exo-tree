@@ -10,7 +10,9 @@ export interface FileNode {
   checked?: boolean | 'mixed';
   children?: FileNode[];
 }
-
+/**
+ * NE PAS MODIFIER
+ */
 @Component({
   selector: 'atomic-selectable-tree',
   imports: [CommonModule],
@@ -25,6 +27,7 @@ export class AtomicSelectableTree implements OnChanges {
     if (changes['nodes']) {
       this.initTree(this.nodes);
       this.activeNode = this.nodes[0];
+      this.nodes[0].selected=true;
     }
   }
 
@@ -32,6 +35,7 @@ export class AtomicSelectableTree implements OnChanges {
   initTree(nodes: FileNode[], parent?: FileNode) {
     nodes.forEach((n) => {
       n.parent = parent;
+      n.selected = false;
       if (n.children) this.initTree(n.children, n);
     });
   }
